@@ -13,12 +13,20 @@ class BooksApp extends React.Component {
         read: [],
     };
 
-  componentDidMount() {
-     BooksAPI.getAll().then(books => this.setState({
+    getAllBooks = () => {
+      BooksAPI.getAll().then(books => this.setState({
          currentlyReading: _.filter(books, ['shelf', 'currentlyReading']),
          wantToRead: _.filter(books, ['shelf', 'wantToRead']),
          read: _.filter(books, ['shelf', 'read']),
-     }));
+      }));
+    }
+
+    changeShelf = (book, shelf) => {
+      BooksAPI.update(book, shelf).then(this.getAllBooks);
+    }
+
+  componentDidMount() {
+     this.getAllBooks();
   }
 
   render() {
@@ -54,9 +62,9 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <Bookshelf title="Currently Reading" books={this.state.currentlyReading}/>
-                <Bookshelf title="Want to Read" books={this.state.wantToRead}/>
-                <Bookshelf title="Read" books={this.state.read}/>
+                <Bookshelf title="Currently Reading" books={this.state.currentlyReading} handleOnChange={this.changeShelf}/>
+                <Bookshelf title="Want to Read" books={this.state.wantToRead} handleOnChange={this.changeShelf}/>
+                <Bookshelf title="Read" books={this.state.read} handleOnChange={this.changeShelf}/>
               </div>
             </div>
             <div className="open-search">

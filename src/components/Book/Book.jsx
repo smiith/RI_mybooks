@@ -1,8 +1,10 @@
 import React from 'react';
+import _ from 'lodash';
+
 
 const renderAuthor = (author,i) => (<div key={i} className="book-authors">{author}</div>);
 
-export default ({title, authors, backgroundImage}) => (
+export default ({book, handleOnChange}) => (
     <div className="book">
         <div className="book-top">
             <div
@@ -10,11 +12,11 @@ export default ({title, authors, backgroundImage}) => (
                 style={{
                     width: 128,
                     height: 193,
-                    backgroundImage: `url(${backgroundImage})`,
+                    backgroundImage: `url(${_.get(book, 'imageLinks.smallThumbnail')})`,
                 }}
             />
             <div className="book-shelf-changer">
-                <select>
+                <select onChange={e => handleOnChange(book, e.target.value)} value={book.shelf}>
                     <option value="move" disabled>
                         Move to...
                     </option>
@@ -25,7 +27,7 @@ export default ({title, authors, backgroundImage}) => (
                 </select>
             </div>
         </div>
-        <div className="book-title">{title}</div>
-        {authors.map(renderAuthor)}
+        <div className="book-title">{book.title}</div>
+        {book.authors.map(renderAuthor)}
     </div>
 );

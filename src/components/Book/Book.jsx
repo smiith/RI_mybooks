@@ -1,5 +1,6 @@
 import React from 'react';
 
+const renderAuthor = (author,i) => (<div key={i} className="book-authors">{author}</div>);
 
 export default ({title, authors, backgroundImage}) => (
     <div className="book">
@@ -9,7 +10,7 @@ export default ({title, authors, backgroundImage}) => (
                 style={{
                     width: 128,
                     height: 193,
-                    backgroundImage: backgroundImage,
+                    backgroundImage: `url(${backgroundImage})`,
                 }}
             />
             <div className="book-shelf-changer">
@@ -25,6 +26,6 @@ export default ({title, authors, backgroundImage}) => (
             </div>
         </div>
         <div className="book-title">{title}</div>
-        <div className="book-authors">{authors}</div>
+        {authors.map(renderAuthor)}
     </div>
 );

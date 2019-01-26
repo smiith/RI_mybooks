@@ -1,5 +1,4 @@
 import React from "react";
-import _ from "lodash";
 
 const renderAuthor = (author, i) => (
   <div key={i} className="book-authors">
@@ -16,7 +15,10 @@ export default ({ book, handleOnChange }) => (
           style={{
             width: 128,
             height: 193,
-            backgroundImage: `url(${_.get(book, "imageLinks.smallThumbnail")})`
+            backgroundImage:
+              book && book.imageLinks && book.imageLinks.smallThumbnail
+                ? `url(${book.imageLinks.smallThumbnail})`
+                : undefined
           }}
         />
         <div className="book-shelf-changer">

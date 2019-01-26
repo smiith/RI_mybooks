@@ -23,3 +23,9 @@ export const searchBooks = query => dispatch =>
       payload: Array.isArray(books) ? books : []
     })
   );
+
+export const clearSearchBooks = query => dispatch =>
+  dispatch({
+    type: ACTIONS.BOOKS_SEARCH_LOADED,
+    payload: []
+  });

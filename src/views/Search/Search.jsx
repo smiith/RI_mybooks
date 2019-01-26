@@ -1,12 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { searchBooks } from "../../modules/books/books-actions";
+import {
+  searchBooks,
+  clearSearchBooks
+} from "../../modules/books/books-actions";
 import { getBooksSearch } from "../../modules/books/books-selectors";
 import Book from "../../components/Book/Book";
 
 const Search = props => {
-  const handleChange = e => props.searchBooks(e.target.value);
+  const handleChange = e =>
+    e.target.value
+      ? props.searchBooks(e.target.value)
+      : props.clearSearchBooks();
   return (
     <div className="search-books">
       <div className="search-books-bar">
@@ -45,5 +51,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { searchBooks }
+  { searchBooks, clearSearchBooks }
 )(Search);

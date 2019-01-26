@@ -22,7 +22,7 @@ export default ({ book, handleOnChange }) => (
         <div className="book-shelf-changer">
           <select
             onChange={e => handleOnChange(book, e.target.value)}
-            value={book.shelf}
+            value={book.shelf || "none"}
           >
             <option value="move" disabled>
               Move to...
@@ -35,7 +35,7 @@ export default ({ book, handleOnChange }) => (
         </div>
       </div>
       <div className="book-title">{book.title}</div>
-      {book.authors.map(renderAuthor)}
+      {book.authors && book.authors.map(renderAuthor)}
     </div>
   </li>
 );

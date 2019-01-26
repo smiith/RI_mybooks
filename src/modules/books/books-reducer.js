@@ -1,12 +1,19 @@
 import { ACTIONS } from "./books-actions";
 
 const initialState = {
-  books: []
+  books: [],
+  searchedBooks: []
 };
 
 export default function(state = initialState, action) {
-  if (action.type === ACTIONS.BOOKS_LOADED) {
-    return { ...state, books: action.payload };
+  switch (action.type) {
+    case ACTIONS.BOOKS_LOADED:
+      return { ...state, books: action.payload };
+
+    case ACTIONS.BOOKS_SEARCH_LOADED:
+      return { ...state, searchedBooks: action.payload };
+
+    default:
+      return state;
   }
-  return state;
 }

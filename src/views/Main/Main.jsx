@@ -1,19 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import Bookshelf from "../../components/Bookshelf/Bookshelf";
-import * as BooksAPI from "../../BooksAPI";
 import {
   getCurrentlyReadingBooks,
   getReadBooks,
   getWantToReadBooks
 } from "../../modules/books/books-selectors";
-import { getAllBooks } from "../../modules/books/books-actions";
+import { getAllBooks, changeShelf } from "../../modules/books/books-actions";
 
 class Main extends React.Component {
-  changeShelf = (book, shelf) => {
-    BooksAPI.update(book, shelf).then(this.props.getAllBooks);
-  };
-
   render() {
     return (
       <div className="app">
@@ -26,17 +21,17 @@ class Main extends React.Component {
               <Bookshelf
                 title="Currently Reading"
                 books={this.props.booksCurrentlyReading}
-                handleOnChange={this.changeShelf}
+                handleOnChange={this.props.changeShelf}
               />
               <Bookshelf
                 title="Want to Read"
                 books={this.props.booksWantToRead}
-                handleOnChange={this.changeShelf}
+                handleOnChange={this.props.changeShelf}
               />
               <Bookshelf
                 title="Read"
                 books={this.props.booksRead}
-                handleOnChange={this.changeShelf}
+                handleOnChange={this.props.changeShelf}
               />
             </div>
           </div>
@@ -56,7 +51,8 @@ const mapStateToProps = state => ({
   booksWantToRead: getWantToReadBooks(state),
   booksRead: getReadBooks(state)
 });
+
 export default connect(
   mapStateToProps,
-  { getAllBooks }
+  { getAllBooks, changeShelf }
 )(Main);

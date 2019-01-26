@@ -11,3 +11,6 @@ export const getAllBooks = () => {
     });
   };
 };
+
+export const changeShelf = (book, shelf) => dispatch =>
+  BooksAPI.update(book, shelf).then(() => dispatch(getAllBooks()));

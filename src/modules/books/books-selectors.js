@@ -1,12 +1,10 @@
-import _ from "lodash";
-
 export const getBooksOnShelfs = state => state.books;
 export const getCurrentlyReadingBooks = state =>
-  _.filter(getBooksOnShelfs(state), ["shelf", "currentlyReading"]);
+  getBooksOnShelfs(state).filter(book => book.shelf === "currentlyReading");
 export const getWantToReadBooks = state =>
-  _.filter(getBooksOnShelfs(state), ["shelf", "wantToRead"]);
+  getBooksOnShelfs(state).filter(book => book.shelf === "wantToRead");
 export const getReadBooks = state =>
-  _.filter(getBooksOnShelfs(state), ["shelf", "read"]);
+  getBooksOnShelfs(state).filter(book => book.shelf === "read");
 
 export const getBooksSearch = state => state.searchedBooks;
 

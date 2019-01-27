@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { changeShelf } from "../../modules/books/books-actions";
 
 const renderAuthor = (author, i) => (
   <div key={i} className="book-authors">
@@ -6,7 +8,7 @@ const renderAuthor = (author, i) => (
   </div>
 );
 
-export default ({ book, handleOnChange }) => (
+const Book = ({ book, handleOnChange }) => (
   <li>
     <div className="book">
       <div className="book-top">
@@ -41,3 +43,8 @@ export default ({ book, handleOnChange }) => (
     </div>
   </li>
 );
+
+export default connect(
+  null,
+  { handleOnChange: changeShelf }
+)(Book);

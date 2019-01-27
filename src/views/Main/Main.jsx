@@ -6,7 +6,6 @@ import {
   getReadBooks,
   getWantToReadBooks
 } from "../../modules/books/books-selectors";
-import { getAllBooks, changeShelf } from "../../modules/books/books-actions";
 
 class Main extends React.Component {
   render() {
@@ -21,18 +20,12 @@ class Main extends React.Component {
               <Bookshelf
                 title="Currently Reading"
                 books={this.props.booksCurrentlyReading}
-                handleOnChange={this.props.changeShelf}
               />
               <Bookshelf
                 title="Want to Read"
                 books={this.props.booksWantToRead}
-                handleOnChange={this.props.changeShelf}
               />
-              <Bookshelf
-                title="Read"
-                books={this.props.booksRead}
-                handleOnChange={this.props.changeShelf}
-              />
+              <Bookshelf title="Read" books={this.props.booksRead} />
             </div>
           </div>
           <div className="open-search">
@@ -52,7 +45,4 @@ const mapStateToProps = state => ({
   booksRead: getReadBooks(state)
 });
 
-export default connect(
-  mapStateToProps,
-  { getAllBooks, changeShelf }
-)(Main);
+export default connect(mapStateToProps)(Main);

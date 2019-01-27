@@ -37,7 +37,7 @@ const Search = props => {
       <div className="search-books-results">
         <ol className="books-grid">
           {props.searchedBooks.map(book => (
-            <Book key={book.id} book={book} handleOnChange={() => {}} />
+            <Book key={book.id} book={book} />
           ))}
         </ol>
       </div>

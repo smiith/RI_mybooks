@@ -9,3 +9,9 @@ export const getReadBooks = state =>
   _.filter(getBooksOnShelfs(state), ["shelf", "read"]);
 
 export const getBooksSearch = state => state.searchedBooks;
+
+export const getBookShelfsById = state =>
+  getBooksOnShelfs(state).reduce(
+    (acc, book) => ({ ...acc, [book.id]: book.shelf }),
+    {}
+  );

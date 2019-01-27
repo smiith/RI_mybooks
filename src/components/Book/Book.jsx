@@ -8,7 +8,7 @@ const renderAuthor = (author, i) => (
   </div>
 );
 
-const Book = ({ book, handleOnChange }) => (
+const Book = ({ book, handleOnChange, shelf }) => (
   <li>
     <div className="book">
       <div className="book-top">
@@ -26,7 +26,7 @@ const Book = ({ book, handleOnChange }) => (
         <div className="book-shelf-changer">
           <select
             onChange={e => handleOnChange(book, e.target.value)}
-            value={book.shelf || "none"}
+            value={shelf}
           >
             <option value="move" disabled>
               Move to...
